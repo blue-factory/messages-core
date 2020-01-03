@@ -14,7 +14,7 @@ The channel corresponds to an attribute of **message**, therefore, the name will
 
 The provider corresponds and attribute of **channel** and allows to identify what types of messages are available for a specific channel.
 
-For example, for the [Email](https://github.com/microapis/messages-email-api) channel there are the providers of [Sendgrid](https://sendgrid.com/), [Mandrill](https://mandrill.com/) and [AWS SES](https://aws.amazon.com/ses/). To know more, you must enter the repositories associated with the channels.
+For example, for the [Email Channel](https://github.com/microapis/messages-email-api) there are the providers of [Sendgrid](https://sendgrid.com/), [Mandrill](https://mandrill.com/) and [AWS SES](https://aws.amazon.com/ses/). To know more, you must enter the repositories associated with the channels.
 
 ## gRPC Service
 
