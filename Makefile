@@ -30,14 +30,6 @@ linux l:
 	@echo "[build-linux] Building service..."
 	@cd cmd/scheduler && GOOS=linux GOARCH=amd64 go build -o $(BIN)
 
-add-migration am: 
-	@echo "[add-migration] Adding migration"
-	@goose -dir "./database/migrations" create $(name) sql
-
-migrations m:
-	@echo "[migrations] Runing migrations..."
-	@cd database/migrations && goose postgres $(DSN) up
-
 docker d:
 	@echo "[docker] Building image..."
 	@docker build -t $(SVC):$(VERSION) .
@@ -68,4 +60,4 @@ proto pro: clean-proto
 	@echo "[proto] Generating proto file..."
 	@protoc --go_out=plugins=grpc:. ./proto/*.proto 
 
-.PHONY: clean c run r build b linux l add-migration am migrations m docker d docker-login dl push p compose co stop s clean-proto cp proto pro
+.PHONY: clean c run r build b linux l docker d docker-login dl push p compose co stop s clean-proto cp proto pro
