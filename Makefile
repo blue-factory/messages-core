@@ -26,7 +26,7 @@ build b: proto
 	@echo "[build] Building service..."
 	@cd cmd/scheduler && go build -o $(BIN)
 
-linux l:
+linux l: 
 	@echo "[build-linux] Building service..."
 	@cd cmd/scheduler && GOOS=linux GOARCH=amd64 go build -o $(BIN)
 
@@ -46,7 +46,7 @@ docker-login dl:
 	@echo "[docker] Login to docker..."
 	@docker login -u $(DOCKER_USER) -p $(DOCKER_PASS)
 
-push p: linux docker docker-login
+push p: proto linux docker docker-login
 	@echo "[docker] pushing $(REGISTRY_URL)/$(SVC):$(VERSION)"
 	@docker tag $(SVC):$(VERSION) $(REGISTRY_URL)/$(SVC):$(VERSION)
 	@docker push $(REGISTRY_URL)/$(SVC):$(VERSION)
