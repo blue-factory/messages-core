@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: messages-api
+  labels:
+    app: messages-api
+    service: messages-api
+spec:
+  ports:
+    - port: 5050
+      name: grpc
+  selector:
+    app: messages-api
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: messages-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: messages-api
+  labels:
+    app: messages-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: messages-api
+  template:
+    metadata:
+      labels:
+        app: messages-api
+    spec:
+      serviceAccountName: messages-api
+      containers:
+        - name: messages-api
+          image: microapis/messages-api:0.1.0
+          ports:
+            - containerPort: 5050
+          env:
+            - name: REDIS_HOST
+              value: messages-redis
+            - name: REDIS_PORT
+              value: 6379
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512Mi
+            limits:
+              cpu: 400m
+              memory: 1024Mi
