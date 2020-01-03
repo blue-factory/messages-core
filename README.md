@@ -4,8 +4,6 @@ Microservice responsible to send everything notifications such as: email, sms, i
 
 The service corresponds to a planner who, through the grpc protocol, can place, update or cancel the sending of notifications.
 
-For this, two entities, channels and suppliers are defined.
-
 ## Channels
 
 Corresponds to the type of message that could be sent, for this there must be the implementation of that channel. There are currently several channels available to use, some are [Email](https://github.com/microapis/messages-email-api), [SMS](https://github.com/microapis/messages-sms-api), [IoT](https://github.com/microapis/messages-iot-api), [Push](https://github.com/microapis/messages-push-api) and [Hook](https://github.com/microapis/messages-hook-api).
