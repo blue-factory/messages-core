@@ -24,11 +24,11 @@ run r:
 
 build b: proto
 	@echo "[build] Building service..."
-	@cd cmd/scheduler && go build -o $(BIN)
+	@cd cmd && go build -o $(BIN)
 
 linux l: 
 	@echo "[build-linux] Building service..."
-	@cd cmd/scheduler && GOOS=linux GOARCH=amd64 go build -o $(BIN)
+	@cd cmd && GOOS=linux GOARCH=amd64 go build -o $(BIN)
 
 docker d:
 	@echo "[docker] Building image..."
