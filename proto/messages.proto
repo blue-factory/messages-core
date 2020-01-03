@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+package proto;
+
+// ------------------- Base -------------------
+
+message MessagesError {
+	int32 code     = 1;
+	string message = 2;
+}
+
+// ------------ Messages Backend ---------------
+
+service MessageBackendService {
+  rpc Approve(MessageBackendApproveRequest) returns (MessageBackendApproveResponse) {}
+  rpc Deliver(MessageBackendDeliverRequest) returns (MessageBackendDeliverResponse) {}
+}
+
+message MessageBackendApproveRequest {
+  string content = 1;
+}
+
+message MessageBackendApproveResponse {
+  bool  valid = 1;
+  MessagesError error = 2;
+}
+
+message MessageBackendDeliverRequest {
+  string content = 1;
+}
+
+message MessageBackendDeliverResponse {
+  MessagesError error = 1;
+}
+
+// ----------------- Messages -----------------
+
+service MessageService {
+	rpc Put(MessagePutRequest) returns (MessagePutResponse) {}
+	rpc Get(MessageGetRequest) returns (MessageGetResponse) {}
+	rpc Update(MessageUpdateRequest) returns (MessageUpdateResponse) {}
+	rpc Cancel(MessageCancelRequest) returns (MessageCancelResponse) {}
+	rpc Register(MessageRegisterRequest) returns (MessageRegisterResponse) {}
+}
+
+message Message {
+	string id = 1;
+	string channel = 2;
+	string provider = 3;
+	string content = 4;
+	string status = 5;
+}
+
+message Channel {
+	string name = 1;
+	repeated Provider providers = 2;
+	string host = 3;
+	string port = 4;
+}
+
+message Provider {
+	string name = 1;
+	map<string, google.protobuf.Any> params = 2;
+}
+
+message MessagePutRequest {
+	string channel = 1;
+	string provider = 2;
+	string content = 3;
+	int64 delay = 4;
+}
+message MessagePutDataResponse {
+	string id = 1;
+}
+message MessagePutResponse {
+	MessagePutDataResponse data = 1;
+  MessagesError error = 2;
+}
+
+message MessageGetRequest {
+  string id = 1;
+}
+message MessageGetResponse {
+	Message data = 1;
+	MessagesError error = 2;
+}
+
+message MessageUpdateRequest {
+	string id = 1;
+	string content = 2;
+}
+message MessageUpdateResponse {
+  MessagesError error = 1;
+}
+
+message MessageCancelRequest {
+  string id = 1;
+}
+message MessageCancelResponse {
+  MessagesError error = 1;
+}
+
+message MessageRegisterRequest {
+  Channel channel = 1;
+}
+message MessageRegisterResponse {
+  MessagesError error = 1;
+}
