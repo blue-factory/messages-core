@@ -1,8 +1,13 @@
 # Messages API
 
-Microservice responsible to send everything notifications such as: email, sms, iot, push and hooks.
+Microservice responsible to send everything notifications such as: email, sms, iot, push and hooks. The service has a planner who, through the grpc protocol, can place, update or cancel the sending of notifications.
 
-The service corresponds to a planner who, through the grpc protocol, can place, update or cancel the sending of notifications.
+## Service Architecture
+
+The solution consists of a central microservice that is connected to the queue and the database. On the other hand, there are several **Channel APIs** implementations connected to Messages API.
+
+[![Architecture of
+microservices](./docs/images/messages-architecture.png)](./docs/images/messages-architecture.png)
 
 ## Channels
 
