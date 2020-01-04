@@ -4,7 +4,7 @@ Microservice responsible to send everything notifications such as: email, sms, i
 
 ## Service Architecture
 
-The solution consists of a central microservice that is connected to the queue and the database. On the other hand, there are several **Channel APIs** implementations connected to Messages API.
+The solution consists of a central microservice that is connected to the queue and the database. On the other hand, there are several **Channel APIs** implementations that were registered to Messages API.
 
 [![Architecture of
 microservices](./docs/images/messages-architecture.png)](./docs/images/messages-architecture.png)
