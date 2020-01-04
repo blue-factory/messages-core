@@ -8,7 +8,7 @@
 #
 # Internal variables
 #
-VERSION=0.1.0
+VERSION=0.1.1
 SVC=messages-api
 BIN_PATH=$(PWD)/bin
 BIN=$(BIN_PATH)/$(SVC)
