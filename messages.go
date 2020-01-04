@@ -120,8 +120,8 @@ func (p *Channel) Address() string {
 
 // Provider ...
 type Provider struct {
-	Name   string      `json:"name"`
-	Params interface{} `json:"params"`
+	Name   string            `json:"name"`
+	Params map[string]string `json:"params"`
 }
 
 // Email ...
