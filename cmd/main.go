@@ -79,7 +79,6 @@ func main() {
 
 	// ----- Init grpc
 	s := grpc.NewServer()
-	log.Printf("Starting server at %s redis_url: %s redis_db: %d database: %s \n", redisHost, redisPort, *redisDatabase, *dbfile)
 	proto.RegisterMessageServiceServer(s, schedulersvc.New(scheduler.StorageConfig{
 		MessageStore:     ms,
 		ChannelStore:     cs,
@@ -91,6 +90,7 @@ func main() {
 	}))
 
 	reflection.Register(s)
+	log.Printf("Listen server at %s redis_url: %s redis_port: %s redis_db: %d database: %s \n", addr, redisHost, redisPort, *redisDatabase, *dbfile)
 	if err := s.Serve(lis); err != nil {
 		log.Fatal(err)
 	}
