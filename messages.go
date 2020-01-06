@@ -2,6 +2,7 @@ package messages
 
 import (
 	pb "github.com/microapis/messages-api/proto"
+	"github.com/microapis/messages-api/channel"
 	"github.com/oklog/ulid"
 )
 
@@ -90,7 +91,7 @@ type SchedulerService interface {
 	Cancel(id ulid.ULID) error
 
 	// Register new channel provider service
-	Register(channel Channel) error
+	Register(channel channel.Channel) error
 }
 
 // Backend manages the approval and delivery of messages.
@@ -103,25 +104,6 @@ type Backend interface {
 
 	// Deliver delivers the message encoded in content.
 	Deliver(content string) error
-}
-
-// Channel ...
-type Channel struct {
-	Name      string      `json:"name"`
-	Host      string      `json:"host"`
-	Port      string      `json:"port"`
-	Providers []*Provider `json:"providers"`
-}
-
-// Address Get an provider address
-func (p *Channel) Address() string {
-	return p.Host + ":" + p.Port
-}
-
-// Provider ...
-type Provider struct {
-	Name   string            `json:"name"`
-	Params map[string]string `json:"params"`
 }
 
 // Email ...
