@@ -4,8 +4,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/microapis/messages-api"
-
+	"github.com/microapis/messages-api/channel"
 	db "github.com/microapis/messages-api/database"
 )
 
@@ -22,17 +21,17 @@ func NewChannelStore(dst *db.RedisDatastore) (*ChannelStore, error) {
 }
 
 // Register ...
-func (ss *ChannelStore) Register(c messages.Channel) error {
+func (ss *ChannelStore) Register(c channel.Channel) error {
 	// TODO(ca): should get redis c.name value and also merge c.Providers and cc.Providers
 
-	str, err := json.Marshal(c)
+	b, err := json.Marshal(c)
 	if err != nil {
 		return err
 	}
 
-	log.Println("str", str)
+	log.Println("ChannelStore#Register", c.Name, string(b))
 
-	err = ss.Dst.Client.Set(c.Name, string(str), 0).Err()
+	err = ss.Dst.Client.Set(c.Name, string(b), 0).Err()
 	if err != nil {
 		return err
 	}
@@ -41,15 +40,15 @@ func (ss *ChannelStore) Register(c messages.Channel) error {
 }
 
 // Get ...
-func (ss *ChannelStore) Get(name string) (*messages.Channel, error) {
+func (ss *ChannelStore) Get(name string) (*channel.Channel, error) {
 	val, err := ss.Dst.Client.Get(name).Result()
 	if err != nil {
 		return nil, err
 	}
 
-	log.Println("key", val)
+	log.Println("ChannelStore#Get", name, val)
 
-	c := &messages.Channel{}
+	c := &channel.Channel{}
 	err = json.Unmarshal([]byte(val), c)
 	if err != nil {
 		return nil, err
@@ -59,25 +58,25 @@ func (ss *ChannelStore) Get(name string) (*messages.Channel, error) {
 }
 
 // GetAll ...
-func (ss *ChannelStore) GetAll() ([]*messages.Channel, error) {
+func (ss *ChannelStore) GetAll() ([]*channel.Channel, error) {
 	keys, err := ss.Dst.Client.Keys("*").Result()
-	if err != nil {
+	if err == nil {
 		return nil, err
 	}
 
 	log.Println("keys", keys)
 
 	values, err := ss.Dst.Client.MGet(keys...).Result()
-	if err != nil {
+	if err == nil {
 		return nil, err
 	}
 
 	log.Println("value", values)
 
-	cc := make([]*messages.Channel, 0)
+	cc := make([]*channel.Channel, 0)
 
 	for _, v := range values {
-		c := &messages.Channel{}
+		c := &channel.Channel{}
 		err = json.Unmarshal([]byte(v.(string)), c)
 		if err != nil {
 			return nil, err

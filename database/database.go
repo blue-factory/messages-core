@@ -1,6 +1,8 @@
 package db
 
 import (
+	"fmt"
+	"log"
 	"os"
 
 	"github.com/boltdb/bolt"
@@ -46,10 +48,17 @@ func NewBoltDatastore(path string) (*BoltDatastore, error) {
 // a datasore cannot be returned
 func NewRedisDatastore(host, port string) (*RedisDatastore, error) {
 	client := redis.NewClient(&redis.Options{
-		Addr:     host + ":" + port,
-		Password: "", // no password set
-		DB:       0,  // use default DB
+		Addr: fmt.Sprintf("%s:%s", host, port),
+		DB:   0, // channels db
 	})
+
+	log.Println("Redis: ping")
+	_, err := client.Ping().Result()
+	if err != nil {
+		return nil, err
+	}
+
+	log.Println("Redis: pong")
 
 	return &RedisDatastore{
 		Client: client,
