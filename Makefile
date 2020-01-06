@@ -14,13 +14,17 @@ BIN_PATH=$(PWD)/bin
 BIN=$(BIN_PATH)/$(SVC)
 REGISTRY_URL=$(DOCKER_USER)
 
+PORT=5050
+REDIS_HOST=localhost
+REDIS_PORT=6379
+
 clean c:
 	@echo "[clean] Cleaning bin folder..."
 	@rm -rf bin/
 
 run r:
 	@echo "[running] Running service..."
-	@go run cmd/main.go
+	@PORT=$(PORT) REDIS_HOST=$(REDIS_HOST) REDIS_PORT=$(REDIS_PORT) go run cmd/main.go
 
 build b: proto
 	@echo "[build] Building service..."
