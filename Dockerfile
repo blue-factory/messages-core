@@ -1,28 +1,28 @@
-# Base container for compile service
-FROM golang:alpine AS builder
+# # Base container for compile service
+# FROM golang:alpine AS builder
 
-# Define service name
-ARG SVC=messages-api
+# # Define service name
+# ARG SVC=messages-api
 
-# Install dependencies
-RUN apk add make
+# # Install dependencies
+# RUN apk add make
 
-# Go to builder workdir
-WORKDIR /go/src/github.com/microapis/${SVC}/
+# # Go to builder workdir
+# WORKDIR /go/src/github.com/microapis/${SVC}/
 
-# Copy go modules files
-COPY go.mod .
-COPY go.sum .
+# # Copy go modules files
+# # COPY go.mod .
+# # COPY go.sum .
 
-# Install dependencies
-RUN go mod download
+# # # Install dependencies
+# # RUN go mod download
 
-# Copy all source code
-COPY . .
+# # Copy all source code
+# COPY . .
 
 
-# Compile service
-RUN make linux
+# # Compile service
+# RUN make linux
 
 #####################################################################
 #####################################################################
@@ -40,7 +40,7 @@ WORKDIR /src/${SVC}
 RUN apk add --update ca-certificates wget
 
 # Copy binaries
-COPY --from=builder /go/src/github.com/microapis/${SVC}/bin/${SVC} /usr/bin/${SVC}
+COPY bin/${SVC} /usr/bin/${SVC}
 
 # Expose service port
 EXPOSE 5050
