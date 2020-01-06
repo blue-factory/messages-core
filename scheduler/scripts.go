@@ -2,7 +2,6 @@ package scheduler
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/garyburd/redigo/redis"
 	"github.com/oklog/ulid"
@@ -65,7 +64,6 @@ type priorityQueue struct {
 }
 
 func newPriorityQueue(config StorageConfig) *priorityQueue {
-	log.Println(config)
 	pool := &redis.Pool{
 		Dial:        dial(config),
 		MaxIdle:     config.RedisMaxIdle,

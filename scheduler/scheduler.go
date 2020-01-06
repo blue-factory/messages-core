@@ -8,6 +8,7 @@ import (
 
 	"github.com/boltdb/bolt"
 	"github.com/microapis/messages-api"
+	"github.com/microapis/messages-api/channel"
 	dbBolt "github.com/microapis/messages-api/database/bolt"
 	dbRedis "github.com/microapis/messages-api/database/redis"
 	pb "github.com/microapis/messages-api/proto"
@@ -102,6 +103,7 @@ func (s *service) Put(id ulid.ULID, channel string, provider string, content str
 		ID:       id,
 		Content:  content,
 		Status:   status,
+		Channel:  channel,
 		Provider: provider,
 	}
 
@@ -156,7 +158,7 @@ func (s *service) Cancel(id ulid.ULID) error {
 }
 
 // Register ...
-func (s *service) Register(c messages.Channel) error {
+func (s *service) Register(c channel.Channel) error {
 	err := s.cs.Register(c)
 	if err != nil {
 		return err
@@ -225,8 +227,15 @@ func (s *service) send(id ulid.ULID) {
 		return
 	}
 
+	ch, err := s.cs.Get(msg.Channel)
+	if err != nil {
+		log.Printf("Error: could not get channel, backend %s is not register, %v", msg.Channel, err)
+		return
+	}
+
 	// TODO(ja): use secure connections
-	conn, err := grpc.Dial(string(msg.Provider), grpc.WithInsecure())
+
+	conn, err := grpc.Dial(ch.Address(), grpc.WithInsecure())
 	if err != nil {
 		log.Printf("Error: could not connect to backend at %s, %v", msg.Provider, err)
 		return
