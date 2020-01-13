@@ -49,7 +49,6 @@ service MessageService {
   rpc Get(MessageGetRequest) returns (MessageGetResponse) {}
   rpc Update(MessageUpdateRequest) returns (MessageUpdateResponse) {}
   rpc Cancel(MessageCancelRequest) returns (MessageCancelResponse) {}
-  rpc Register(MessageRegisterRequest) returns (MessageRegisterResponse) {}
 }
 ```
 
