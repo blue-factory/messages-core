@@ -69,170 +69,6 @@ func (m *MessagesError) GetMessage() string {
 	return ""
 }
 
-type MessageBackendApproveRequest struct {
-	Content              string   `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *MessageBackendApproveRequest) Reset()         { *m = MessageBackendApproveRequest{} }
-func (m *MessageBackendApproveRequest) String() string { return proto.CompactTextString(m) }
-func (*MessageBackendApproveRequest) ProtoMessage()    {}
-func (*MessageBackendApproveRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{1}
-}
-
-func (m *MessageBackendApproveRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_MessageBackendApproveRequest.Unmarshal(m, b)
-}
-func (m *MessageBackendApproveRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_MessageBackendApproveRequest.Marshal(b, m, deterministic)
-}
-func (m *MessageBackendApproveRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MessageBackendApproveRequest.Merge(m, src)
-}
-func (m *MessageBackendApproveRequest) XXX_Size() int {
-	return xxx_messageInfo_MessageBackendApproveRequest.Size(m)
-}
-func (m *MessageBackendApproveRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_MessageBackendApproveRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MessageBackendApproveRequest proto.InternalMessageInfo
-
-func (m *MessageBackendApproveRequest) GetContent() string {
-	if m != nil {
-		return m.Content
-	}
-	return ""
-}
-
-type MessageBackendApproveResponse struct {
-	Valid                bool           `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`
-	Error                *MessagesError `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
-	XXX_unrecognized     []byte         `json:"-"`
-	XXX_sizecache        int32          `json:"-"`
-}
-
-func (m *MessageBackendApproveResponse) Reset()         { *m = MessageBackendApproveResponse{} }
-func (m *MessageBackendApproveResponse) String() string { return proto.CompactTextString(m) }
-func (*MessageBackendApproveResponse) ProtoMessage()    {}
-func (*MessageBackendApproveResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{2}
-}
-
-func (m *MessageBackendApproveResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_MessageBackendApproveResponse.Unmarshal(m, b)
-}
-func (m *MessageBackendApproveResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_MessageBackendApproveResponse.Marshal(b, m, deterministic)
-}
-func (m *MessageBackendApproveResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MessageBackendApproveResponse.Merge(m, src)
-}
-func (m *MessageBackendApproveResponse) XXX_Size() int {
-	return xxx_messageInfo_MessageBackendApproveResponse.Size(m)
-}
-func (m *MessageBackendApproveResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MessageBackendApproveResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MessageBackendApproveResponse proto.InternalMessageInfo
-
-func (m *MessageBackendApproveResponse) GetValid() bool {
-	if m != nil {
-		return m.Valid
-	}
-	return false
-}
-
-func (m *MessageBackendApproveResponse) GetError() *MessagesError {
-	if m != nil {
-		return m.Error
-	}
-	return nil
-}
-
-type MessageBackendDeliverRequest struct {
-	Content              string   `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *MessageBackendDeliverRequest) Reset()         { *m = MessageBackendDeliverRequest{} }
-func (m *MessageBackendDeliverRequest) String() string { return proto.CompactTextString(m) }
-func (*MessageBackendDeliverRequest) ProtoMessage()    {}
-func (*MessageBackendDeliverRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{3}
-}
-
-func (m *MessageBackendDeliverRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_MessageBackendDeliverRequest.Unmarshal(m, b)
-}
-func (m *MessageBackendDeliverRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_MessageBackendDeliverRequest.Marshal(b, m, deterministic)
-}
-func (m *MessageBackendDeliverRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MessageBackendDeliverRequest.Merge(m, src)
-}
-func (m *MessageBackendDeliverRequest) XXX_Size() int {
-	return xxx_messageInfo_MessageBackendDeliverRequest.Size(m)
-}
-func (m *MessageBackendDeliverRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_MessageBackendDeliverRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MessageBackendDeliverRequest proto.InternalMessageInfo
-
-func (m *MessageBackendDeliverRequest) GetContent() string {
-	if m != nil {
-		return m.Content
-	}
-	return ""
-}
-
-type MessageBackendDeliverResponse struct {
-	Error                *MessagesError `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
-	XXX_unrecognized     []byte         `json:"-"`
-	XXX_sizecache        int32          `json:"-"`
-}
-
-func (m *MessageBackendDeliverResponse) Reset()         { *m = MessageBackendDeliverResponse{} }
-func (m *MessageBackendDeliverResponse) String() string { return proto.CompactTextString(m) }
-func (*MessageBackendDeliverResponse) ProtoMessage()    {}
-func (*MessageBackendDeliverResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{4}
-}
-
-func (m *MessageBackendDeliverResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_MessageBackendDeliverResponse.Unmarshal(m, b)
-}
-func (m *MessageBackendDeliverResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_MessageBackendDeliverResponse.Marshal(b, m, deterministic)
-}
-func (m *MessageBackendDeliverResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MessageBackendDeliverResponse.Merge(m, src)
-}
-func (m *MessageBackendDeliverResponse) XXX_Size() int {
-	return xxx_messageInfo_MessageBackendDeliverResponse.Size(m)
-}
-func (m *MessageBackendDeliverResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MessageBackendDeliverResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MessageBackendDeliverResponse proto.InternalMessageInfo
-
-func (m *MessageBackendDeliverResponse) GetError() *MessagesError {
-	if m != nil {
-		return m.Error
-	}
-	return nil
-}
-
 type Message struct {
 	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Channel              string   `protobuf:"bytes,2,opt,name=channel,proto3" json:"channel,omitempty"`
@@ -248,7 +84,7 @@ func (m *Message) Reset()         { *m = Message{} }
 func (m *Message) String() string { return proto.CompactTextString(m) }
 func (*Message) ProtoMessage()    {}
 func (*Message) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{5}
+	return fileDescriptor_346d92f49d8efbd3, []int{1}
 }
 
 func (m *Message) XXX_Unmarshal(b []byte) error {
@@ -318,7 +154,7 @@ func (m *Channel) Reset()         { *m = Channel{} }
 func (m *Channel) String() string { return proto.CompactTextString(m) }
 func (*Channel) ProtoMessage()    {}
 func (*Channel) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{6}
+	return fileDescriptor_346d92f49d8efbd3, []int{2}
 }
 
 func (m *Channel) XXX_Unmarshal(b []byte) error {
@@ -379,7 +215,7 @@ func (m *Provider) Reset()         { *m = Provider{} }
 func (m *Provider) String() string { return proto.CompactTextString(m) }
 func (*Provider) ProtoMessage()    {}
 func (*Provider) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{7}
+	return fileDescriptor_346d92f49d8efbd3, []int{3}
 }
 
 func (m *Provider) XXX_Unmarshal(b []byte) error {
@@ -428,7 +264,7 @@ func (m *MessagePutRequest) Reset()         { *m = MessagePutRequest{} }
 func (m *MessagePutRequest) String() string { return proto.CompactTextString(m) }
 func (*MessagePutRequest) ProtoMessage()    {}
 func (*MessagePutRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{8}
+	return fileDescriptor_346d92f49d8efbd3, []int{4}
 }
 
 func (m *MessagePutRequest) XXX_Unmarshal(b []byte) error {
@@ -488,7 +324,7 @@ func (m *MessagePutDataResponse) Reset()         { *m = MessagePutDataResponse{}
 func (m *MessagePutDataResponse) String() string { return proto.CompactTextString(m) }
 func (*MessagePutDataResponse) ProtoMessage()    {}
 func (*MessagePutDataResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{9}
+	return fileDescriptor_346d92f49d8efbd3, []int{5}
 }
 
 func (m *MessagePutDataResponse) XXX_Unmarshal(b []byte) error {
@@ -528,7 +364,7 @@ func (m *MessagePutResponse) Reset()         { *m = MessagePutResponse{} }
 func (m *MessagePutResponse) String() string { return proto.CompactTextString(m) }
 func (*MessagePutResponse) ProtoMessage()    {}
 func (*MessagePutResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{10}
+	return fileDescriptor_346d92f49d8efbd3, []int{6}
 }
 
 func (m *MessagePutResponse) XXX_Unmarshal(b []byte) error {
@@ -574,7 +410,7 @@ func (m *MessageGetRequest) Reset()         { *m = MessageGetRequest{} }
 func (m *MessageGetRequest) String() string { return proto.CompactTextString(m) }
 func (*MessageGetRequest) ProtoMessage()    {}
 func (*MessageGetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{11}
+	return fileDescriptor_346d92f49d8efbd3, []int{7}
 }
 
 func (m *MessageGetRequest) XXX_Unmarshal(b []byte) error {
@@ -614,7 +450,7 @@ func (m *MessageGetResponse) Reset()         { *m = MessageGetResponse{} }
 func (m *MessageGetResponse) String() string { return proto.CompactTextString(m) }
 func (*MessageGetResponse) ProtoMessage()    {}
 func (*MessageGetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{12}
+	return fileDescriptor_346d92f49d8efbd3, []int{8}
 }
 
 func (m *MessageGetResponse) XXX_Unmarshal(b []byte) error {
@@ -661,7 +497,7 @@ func (m *MessageUpdateRequest) Reset()         { *m = MessageUpdateRequest{} }
 func (m *MessageUpdateRequest) String() string { return proto.CompactTextString(m) }
 func (*MessageUpdateRequest) ProtoMessage()    {}
 func (*MessageUpdateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{13}
+	return fileDescriptor_346d92f49d8efbd3, []int{9}
 }
 
 func (m *MessageUpdateRequest) XXX_Unmarshal(b []byte) error {
@@ -707,7 +543,7 @@ func (m *MessageUpdateResponse) Reset()         { *m = MessageUpdateResponse{} }
 func (m *MessageUpdateResponse) String() string { return proto.CompactTextString(m) }
 func (*MessageUpdateResponse) ProtoMessage()    {}
 func (*MessageUpdateResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{14}
+	return fileDescriptor_346d92f49d8efbd3, []int{10}
 }
 
 func (m *MessageUpdateResponse) XXX_Unmarshal(b []byte) error {
@@ -746,7 +582,7 @@ func (m *MessageCancelRequest) Reset()         { *m = MessageCancelRequest{} }
 func (m *MessageCancelRequest) String() string { return proto.CompactTextString(m) }
 func (*MessageCancelRequest) ProtoMessage()    {}
 func (*MessageCancelRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{15}
+	return fileDescriptor_346d92f49d8efbd3, []int{11}
 }
 
 func (m *MessageCancelRequest) XXX_Unmarshal(b []byte) error {
@@ -785,7 +621,7 @@ func (m *MessageCancelResponse) Reset()         { *m = MessageCancelResponse{} }
 func (m *MessageCancelResponse) String() string { return proto.CompactTextString(m) }
 func (*MessageCancelResponse) ProtoMessage()    {}
 func (*MessageCancelResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{16}
+	return fileDescriptor_346d92f49d8efbd3, []int{12}
 }
 
 func (m *MessageCancelResponse) XXX_Unmarshal(b []byte) error {
@@ -813,90 +649,8 @@ func (m *MessageCancelResponse) GetError() *MessagesError {
 	return nil
 }
 
-type MessageRegisterRequest struct {
-	Channel              *Channel `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *MessageRegisterRequest) Reset()         { *m = MessageRegisterRequest{} }
-func (m *MessageRegisterRequest) String() string { return proto.CompactTextString(m) }
-func (*MessageRegisterRequest) ProtoMessage()    {}
-func (*MessageRegisterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{17}
-}
-
-func (m *MessageRegisterRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_MessageRegisterRequest.Unmarshal(m, b)
-}
-func (m *MessageRegisterRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_MessageRegisterRequest.Marshal(b, m, deterministic)
-}
-func (m *MessageRegisterRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MessageRegisterRequest.Merge(m, src)
-}
-func (m *MessageRegisterRequest) XXX_Size() int {
-	return xxx_messageInfo_MessageRegisterRequest.Size(m)
-}
-func (m *MessageRegisterRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_MessageRegisterRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MessageRegisterRequest proto.InternalMessageInfo
-
-func (m *MessageRegisterRequest) GetChannel() *Channel {
-	if m != nil {
-		return m.Channel
-	}
-	return nil
-}
-
-type MessageRegisterResponse struct {
-	Error                *MessagesError `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
-	XXX_unrecognized     []byte         `json:"-"`
-	XXX_sizecache        int32          `json:"-"`
-}
-
-func (m *MessageRegisterResponse) Reset()         { *m = MessageRegisterResponse{} }
-func (m *MessageRegisterResponse) String() string { return proto.CompactTextString(m) }
-func (*MessageRegisterResponse) ProtoMessage()    {}
-func (*MessageRegisterResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_346d92f49d8efbd3, []int{18}
-}
-
-func (m *MessageRegisterResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_MessageRegisterResponse.Unmarshal(m, b)
-}
-func (m *MessageRegisterResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_MessageRegisterResponse.Marshal(b, m, deterministic)
-}
-func (m *MessageRegisterResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MessageRegisterResponse.Merge(m, src)
-}
-func (m *MessageRegisterResponse) XXX_Size() int {
-	return xxx_messageInfo_MessageRegisterResponse.Size(m)
-}
-func (m *MessageRegisterResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MessageRegisterResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MessageRegisterResponse proto.InternalMessageInfo
-
-func (m *MessageRegisterResponse) GetError() *MessagesError {
-	if m != nil {
-		return m.Error
-	}
-	return nil
-}
-
 func init() {
 	proto.RegisterType((*MessagesError)(nil), "proto.MessagesError")
-	proto.RegisterType((*MessageBackendApproveRequest)(nil), "proto.MessageBackendApproveRequest")
-	proto.RegisterType((*MessageBackendApproveResponse)(nil), "proto.MessageBackendApproveResponse")
-	proto.RegisterType((*MessageBackendDeliverRequest)(nil), "proto.MessageBackendDeliverRequest")
-	proto.RegisterType((*MessageBackendDeliverResponse)(nil), "proto.MessageBackendDeliverResponse")
 	proto.RegisterType((*Message)(nil), "proto.Message")
 	proto.RegisterType((*Channel)(nil), "proto.Channel")
 	proto.RegisterType((*Provider)(nil), "proto.Provider")
@@ -910,57 +664,46 @@ func init() {
 	proto.RegisterType((*MessageUpdateResponse)(nil), "proto.MessageUpdateResponse")
 	proto.RegisterType((*MessageCancelRequest)(nil), "proto.MessageCancelRequest")
 	proto.RegisterType((*MessageCancelResponse)(nil), "proto.MessageCancelResponse")
-	proto.RegisterType((*MessageRegisterRequest)(nil), "proto.MessageRegisterRequest")
-	proto.RegisterType((*MessageRegisterResponse)(nil), "proto.MessageRegisterResponse")
 }
 
 func init() { proto.RegisterFile("proto/messages.proto", fileDescriptor_346d92f49d8efbd3) }
 
 var fileDescriptor_346d92f49d8efbd3 = []byte{
-	// 679 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0xdd, 0x6e, 0xd3, 0x4c,
-	0x10, 0x8d, 0xed, 0xfc, 0x4e, 0xf5, 0xf5, 0x83, 0x55, 0x28, 0x26, 0x6d, 0x51, 0xb5, 0x45, 0x28,
-	0x42, 0xa2, 0x88, 0xf4, 0xa6, 0xa0, 0x22, 0x41, 0xdb, 0xa8, 0x17, 0x15, 0x52, 0x64, 0x04, 0xf7,
-	0x4b, 0x3c, 0x6a, 0xa3, 0xa6, 0xb6, 0xb1, 0x37, 0x91, 0x72, 0xc9, 0x0b, 0xf0, 0x5a, 0x3c, 0x0a,
-	0xaf, 0x81, 0xbc, 0x9e, 0x75, 0xbc, 0x4e, 0x4c, 0xd5, 0x5c, 0x79, 0xc7, 0x33, 0x73, 0xe6, 0xec,
-	0xec, 0x99, 0x81, 0x6e, 0x14, 0x87, 0x32, 0x7c, 0x73, 0x87, 0x49, 0x22, 0xae, 0x31, 0x39, 0x52,
-	0x26, 0x6b, 0xa8, 0x0f, 0xff, 0x00, 0xff, 0x7d, 0x26, 0xc7, 0x30, 0x8e, 0xc3, 0x98, 0x31, 0xa8,
-	0x8f, 0x43, 0x1f, 0x5d, 0xeb, 0xc0, 0xea, 0x37, 0x3c, 0x75, 0x66, 0x2e, 0xb4, 0x28, 0xdb, 0xb5,
-	0x0f, 0xac, 0x7e, 0xc7, 0xd3, 0x26, 0x3f, 0x81, 0x3d, 0x4a, 0x3f, 0x13, 0xe3, 0x5b, 0x0c, 0xfc,
-	0x4f, 0x51, 0x14, 0x87, 0x73, 0xf4, 0xf0, 0xc7, 0x0c, 0x13, 0x99, 0x66, 0x8e, 0xc3, 0x40, 0x62,
-	0x20, 0x15, 0x60, 0xc7, 0xd3, 0x26, 0x17, 0xb0, 0x5f, 0x91, 0x99, 0x44, 0x61, 0x90, 0x20, 0xeb,
-	0x42, 0x63, 0x2e, 0xa6, 0x13, 0x5f, 0x25, 0xb6, 0xbd, 0xcc, 0x60, 0xaf, 0xa0, 0x81, 0x29, 0x4f,
-	0x45, 0x64, 0x6b, 0xd0, 0xcd, 0x6e, 0x73, 0x64, 0xdc, 0xc1, 0xcb, 0x42, 0x56, 0xc9, 0x5d, 0xe0,
-	0x74, 0x32, 0xc7, 0xf8, 0x7e, 0x72, 0x57, 0x65, 0x72, 0x79, 0x26, 0x91, 0xcb, 0x69, 0x58, 0xf7,
-	0xd3, 0xf8, 0x69, 0x41, 0x8b, 0x1c, 0x6c, 0x1b, 0x6c, 0xba, 0x51, 0xc7, 0xb3, 0x27, 0xbe, 0xa2,
-	0x70, 0x23, 0x82, 0x00, 0xa7, 0xba, 0xb3, 0x64, 0xb2, 0x1e, 0xb4, 0xd3, 0x7e, 0x4c, 0x7c, 0x8c,
-	0x5d, 0x47, 0xb9, 0x72, 0xbb, 0x48, 0xbc, 0x6e, 0x10, 0x67, 0x3b, 0xd0, 0x4c, 0xa4, 0x90, 0xb3,
-	0xc4, 0x6d, 0x28, 0x07, 0x59, 0x5c, 0x42, 0xeb, 0x9c, 0x80, 0x19, 0xd4, 0x03, 0x71, 0x87, 0x44,
-	0x42, 0x9d, 0xd9, 0x6b, 0xe8, 0x68, 0xf0, 0xc4, 0xb5, 0x0f, 0x9c, 0xfe, 0xd6, 0xe0, 0x7f, 0xba,
-	0xd2, 0x88, 0xfe, 0x7b, 0xcb, 0x88, 0x14, 0xe2, 0x26, 0x4c, 0x24, 0xf1, 0x52, 0xe7, 0xf4, 0x5f,
-	0x14, 0xc6, 0x9a, 0x90, 0x3a, 0xf3, 0x5f, 0x16, 0xb4, 0x75, 0xfe, 0xda, 0xba, 0xc7, 0xd0, 0x8c,
-	0x44, 0x2c, 0xee, 0x74, 0xd1, 0xdd, 0x52, 0xd1, 0xa3, 0x91, 0xf2, 0x0e, 0x03, 0x19, 0x2f, 0x3c,
-	0x0a, 0xed, 0xbd, 0x83, 0xad, 0xc2, 0x6f, 0xf6, 0x08, 0x9c, 0x5b, 0x5c, 0x10, 0x6c, 0x7a, 0x24,
-	0xe5, 0xcc, 0xb4, 0x58, 0x33, 0xe3, 0xbd, 0x7d, 0x62, 0xf1, 0x05, 0x3c, 0xa6, 0x97, 0x18, 0xcd,
-	0x64, 0x51, 0x06, 0xf4, 0x06, 0x56, 0xf5, 0x1b, 0xd8, 0xd5, 0x6f, 0xe0, 0x98, 0x6f, 0xd0, 0x85,
-	0x86, 0x8f, 0x53, 0xb1, 0x50, 0xad, 0x70, 0xbc, 0xcc, 0xe0, 0x7d, 0xd8, 0x59, 0x96, 0xbe, 0x10,
-	0x52, 0xe4, 0x5a, 0x2a, 0x69, 0x82, 0x27, 0xc0, 0x8a, 0x24, 0x29, 0xea, 0x2d, 0xd4, 0x7d, 0x21,
-	0x05, 0x09, 0x6e, 0xdf, 0x14, 0x5c, 0x09, 0xd2, 0x53, 0xa1, 0x0f, 0x9a, 0x95, 0xc3, 0xbc, 0x33,
-	0x97, 0x98, 0x77, 0xa6, 0xcc, 0xcc, 0xcf, 0x99, 0xa9, 0x20, 0x62, 0xc6, 0x0d, 0x66, 0xdb, 0x66,
-	0x95, 0x0d, 0xa8, 0x7c, 0x84, 0x2e, 0xfd, 0xff, 0x1a, 0xf9, 0x42, 0x62, 0x05, 0x9b, 0xe2, 0x0b,
-	0xd8, 0xe6, 0xf8, 0x9e, 0xc3, 0x93, 0x12, 0xc2, 0x06, 0x63, 0xfb, 0x32, 0xa7, 0x71, 0x2e, 0x82,
-	0x31, 0x4e, 0xab, 0x9a, 0xb2, 0x2c, 0xa6, 0xe3, 0x36, 0x28, 0x76, 0x96, 0xab, 0xc3, 0xc3, 0xeb,
-	0x49, 0x22, 0x97, 0x4b, 0xaa, 0x6f, 0xaa, 0x73, 0xd9, 0x60, 0x9a, 0xe7, 0x5c, 0xad, 0x7c, 0x08,
-	0x4f, 0x57, 0x30, 0x1e, 0x4e, 0x65, 0xf0, 0xdb, 0xca, 0x2f, 0x44, 0xcb, 0xef, 0x0b, 0xc6, 0xf3,
-	0xc9, 0x18, 0xd9, 0x37, 0x68, 0xd1, 0x92, 0x66, 0x87, 0x26, 0xc2, 0xda, 0xe5, 0xdf, 0x7b, 0xf1,
-	0xef, 0xa0, 0x8c, 0x1b, 0xaf, 0xa5, 0xb8, 0xb4, 0x5f, 0x2b, 0x70, 0xcd, 0xbd, 0x5d, 0x81, 0x5b,
-	0x5a, 0xd1, 0xbc, 0x36, 0xf8, 0x63, 0xc3, 0x36, 0xc5, 0xe8, 0x2b, 0x9c, 0x82, 0x33, 0x9a, 0x49,
-	0xe6, 0xae, 0x8c, 0x8f, 0xc6, 0x7e, 0xb6, 0xc6, 0x93, 0x13, 0x3d, 0x05, 0xe7, 0x12, 0x57, 0xb2,
-	0x97, 0x03, 0x53, 0xce, 0x2e, 0x4c, 0x09, 0xaf, 0xb1, 0x21, 0x34, 0x33, 0x39, 0xb2, 0x5d, 0x33,
-	0xcc, 0x90, 0x79, 0x6f, 0x6f, 0xbd, 0xb3, 0x08, 0x93, 0x09, 0xad, 0x0c, 0x63, 0xc8, 0xb4, 0x0c,
-	0x63, 0x6a, 0x93, 0xd7, 0xd8, 0x15, 0xb4, 0xb5, 0x4c, 0x58, 0x69, 0x9b, 0x94, 0x24, 0xd8, 0x7b,
-	0x5e, 0xe5, 0xd6, 0x60, 0xdf, 0x9b, 0x2a, 0xe0, 0xf8, 0x6f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x9b,
-	0x45, 0xc4, 0x05, 0x6b, 0x08, 0x00, 0x00,
+	// 535 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x52, 0xd1, 0x8a, 0xd3, 0x40,
+	0x14, 0x6d, 0x92, 0xa6, 0xdd, 0xde, 0xe2, 0xba, 0x0e, 0x71, 0x89, 0x5d, 0x85, 0x32, 0x82, 0x14,
+	0xc1, 0x8a, 0xdd, 0x17, 0x15, 0x05, 0xa1, 0x96, 0x7d, 0x12, 0xca, 0x14, 0x3f, 0x60, 0x4c, 0x2e,
+	0xb6, 0x98, 0x26, 0x71, 0x66, 0x52, 0xe8, 0xa3, 0x3f, 0xe0, 0x17, 0xf8, 0xb1, 0x92, 0xc9, 0x24,
+	0x4d, 0xd2, 0x16, 0x71, 0x9f, 0x72, 0xef, 0xdc, 0x7b, 0xce, 0x3d, 0x9c, 0x13, 0xf0, 0x52, 0x91,
+	0xa8, 0xe4, 0xf5, 0x16, 0xa5, 0xe4, 0xdf, 0x51, 0x4e, 0x75, 0x4b, 0x5c, 0xfd, 0xa1, 0x1f, 0xe1,
+	0xc1, 0x17, 0x33, 0x58, 0x08, 0x91, 0x08, 0x42, 0xa0, 0x1b, 0x24, 0x21, 0xfa, 0xd6, 0xd8, 0x9a,
+	0xb8, 0x4c, 0xd7, 0xc4, 0x87, 0xbe, 0x41, 0xfb, 0xf6, 0xd8, 0x9a, 0x0c, 0x58, 0xd9, 0xd2, 0x5f,
+	0x16, 0xf4, 0x0d, 0x9e, 0x5c, 0x82, 0xbd, 0x09, 0x35, 0x6e, 0xc0, 0xec, 0x4d, 0x98, 0xa3, 0x82,
+	0x35, 0x8f, 0x63, 0x8c, 0x4a, 0x94, 0x69, 0xc9, 0x08, 0x2e, 0x52, 0x91, 0xec, 0x36, 0x21, 0x0a,
+	0xdf, 0xd1, 0xa3, 0xaa, 0xd7, 0xa8, 0x24, 0x56, 0x18, 0x2b, 0xbf, 0x6b, 0x50, 0x45, 0x4b, 0xae,
+	0xa1, 0x27, 0x15, 0x57, 0x99, 0xf4, 0x5d, 0x3d, 0x30, 0x1d, 0x55, 0xd0, 0x9f, 0x1b, 0x62, 0x02,
+	0xdd, 0x98, 0x6f, 0xd1, 0x88, 0xd0, 0x35, 0x79, 0x05, 0x83, 0x92, 0x5c, 0xfa, 0xf6, 0xd8, 0x99,
+	0x0c, 0x67, 0x0f, 0x0b, 0x0f, 0xa6, 0x4b, 0xf3, 0xce, 0x0e, 0x1b, 0x39, 0xc5, 0x3a, 0x91, 0xca,
+	0xe8, 0xd2, 0x75, 0xfe, 0x96, 0x26, 0xa2, 0x14, 0xa4, 0x6b, 0xfa, 0xdb, 0x82, 0x8b, 0x12, 0x7f,
+	0xf2, 0xee, 0x2d, 0xf4, 0x52, 0x2e, 0xf8, 0xb6, 0x3c, 0x7a, 0xd3, 0x3a, 0x3a, 0x5d, 0xea, 0xe9,
+	0x22, 0x56, 0x62, 0xcf, 0xcc, 0xea, 0xe8, 0x1d, 0x0c, 0x6b, 0xcf, 0xe4, 0x0a, 0x9c, 0x1f, 0xb8,
+	0x37, 0xb4, 0x79, 0x49, 0x3c, 0x70, 0x77, 0x3c, 0xca, 0xca, 0x20, 0x8a, 0xe6, 0xbd, 0xfd, 0xd6,
+	0xa2, 0x7b, 0x78, 0x64, 0x92, 0x58, 0x66, 0x8a, 0xe1, 0xcf, 0x0c, 0xa5, 0xaa, 0x67, 0x60, 0x9d,
+	0xcf, 0xc0, 0x3e, 0x9f, 0x81, 0xd3, 0xcc, 0xc0, 0x03, 0x37, 0xc4, 0x88, 0xef, 0xb5, 0x15, 0x0e,
+	0x2b, 0x1a, 0x3a, 0x81, 0xeb, 0xc3, 0xe9, 0xcf, 0x5c, 0x71, 0x86, 0x32, 0x4d, 0x62, 0x79, 0xf4,
+	0x4f, 0x50, 0x09, 0xa4, 0x2e, 0xd2, 0x6c, 0xbd, 0x81, 0x6e, 0xc8, 0x15, 0xd7, 0x7b, 0xc3, 0xd9,
+	0x33, 0x63, 0xd4, 0x69, 0x4a, 0xa6, 0x57, 0xc9, 0x4b, 0x70, 0x31, 0xff, 0x5f, 0xb5, 0xf6, 0xe1,
+	0xcc, 0x6b, 0x62, 0x8a, 0x7f, 0x99, 0x15, 0x2b, 0xf4, 0x79, 0xe5, 0xcc, 0x1d, 0x56, 0xce, 0xb4,
+	0x95, 0x85, 0x95, 0x32, 0xbd, 0x64, 0x94, 0xd1, 0x86, 0xb2, 0xcb, 0xe6, 0x95, 0x7b, 0x48, 0xf9,
+	0x04, 0x9e, 0x79, 0xff, 0x9a, 0x86, 0x5c, 0xe1, 0x19, 0x35, 0xf5, 0x04, 0xec, 0x46, 0x02, 0x74,
+	0x0e, 0x8f, 0x5b, 0x0c, 0x46, 0x6a, 0x25, 0xc3, 0xfa, 0xb7, 0x8c, 0x17, 0x95, 0x8c, 0x39, 0x8f,
+	0x03, 0x8c, 0xce, 0x99, 0x72, 0x38, 0x56, 0xee, 0xfd, 0xff, 0xb1, 0xd9, 0x1f, 0x1b, 0xae, 0x56,
+	0xc1, 0x1a, 0xc3, 0x2c, 0x42, 0xb1, 0x42, 0xb1, 0xdb, 0x04, 0x48, 0x3e, 0x80, 0xb3, 0xcc, 0x14,
+	0xf1, 0x8f, 0xb2, 0x36, 0x52, 0x46, 0x4f, 0x4e, 0x4c, 0x8a, 0xe3, 0xb4, 0x93, 0xa3, 0xef, 0xf0,
+	0x08, 0x7d, 0x48, 0xb7, 0x8d, 0xae, 0x45, 0x4a, 0x3b, 0x64, 0x01, 0xbd, 0xc2, 0x3b, 0x72, 0xd3,
+	0x5c, 0x6b, 0x64, 0x32, 0x7a, 0x7a, 0x7a, 0x58, 0xa7, 0x29, 0x5c, 0x69, 0xd3, 0x34, 0x3c, 0x6d,
+	0xd3, 0x34, 0x8d, 0xa4, 0x9d, 0x6f, 0x3d, 0x3d, 0xbe, 0xfd, 0x1b, 0x00, 0x00, 0xff, 0xff, 0xd9,
+	0xae, 0xf5, 0x28, 0xa7, 0x05, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -971,293 +714,163 @@ var _ grpc.ClientConn
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-// MessageBackendServiceClient is the client API for MessageBackendService service.
+// SchedulerServiceClient is the client API for SchedulerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type MessageBackendServiceClient interface {
-	Approve(ctx context.Context, in *MessageBackendApproveRequest, opts ...grpc.CallOption) (*MessageBackendApproveResponse, error)
-	Deliver(ctx context.Context, in *MessageBackendDeliverRequest, opts ...grpc.CallOption) (*MessageBackendDeliverResponse, error)
-}
-
-type messageBackendServiceClient struct {
-	cc *grpc.ClientConn
-}
-
-func NewMessageBackendServiceClient(cc *grpc.ClientConn) MessageBackendServiceClient {
-	return &messageBackendServiceClient{cc}
-}
-
-func (c *messageBackendServiceClient) Approve(ctx context.Context, in *MessageBackendApproveRequest, opts ...grpc.CallOption) (*MessageBackendApproveResponse, error) {
-	out := new(MessageBackendApproveResponse)
-	err := c.cc.Invoke(ctx, "/proto.MessageBackendService/Approve", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *messageBackendServiceClient) Deliver(ctx context.Context, in *MessageBackendDeliverRequest, opts ...grpc.CallOption) (*MessageBackendDeliverResponse, error) {
-	out := new(MessageBackendDeliverResponse)
-	err := c.cc.Invoke(ctx, "/proto.MessageBackendService/Deliver", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// MessageBackendServiceServer is the server API for MessageBackendService service.
-type MessageBackendServiceServer interface {
-	Approve(context.Context, *MessageBackendApproveRequest) (*MessageBackendApproveResponse, error)
-	Deliver(context.Context, *MessageBackendDeliverRequest) (*MessageBackendDeliverResponse, error)
-}
-
-func RegisterMessageBackendServiceServer(s *grpc.Server, srv MessageBackendServiceServer) {
-	s.RegisterService(&_MessageBackendService_serviceDesc, srv)
-}
-
-func _MessageBackendService_Approve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MessageBackendApproveRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MessageBackendServiceServer).Approve(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/proto.MessageBackendService/Approve",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MessageBackendServiceServer).Approve(ctx, req.(*MessageBackendApproveRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MessageBackendService_Deliver_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MessageBackendDeliverRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MessageBackendServiceServer).Deliver(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/proto.MessageBackendService/Deliver",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MessageBackendServiceServer).Deliver(ctx, req.(*MessageBackendDeliverRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _MessageBackendService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "proto.MessageBackendService",
-	HandlerType: (*MessageBackendServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Approve",
-			Handler:    _MessageBackendService_Approve_Handler,
-		},
-		{
-			MethodName: "Deliver",
-			Handler:    _MessageBackendService_Deliver_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/messages.proto",
-}
-
-// MessageServiceClient is the client API for MessageService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type MessageServiceClient interface {
+type SchedulerServiceClient interface {
 	Put(ctx context.Context, in *MessagePutRequest, opts ...grpc.CallOption) (*MessagePutResponse, error)
 	Get(ctx context.Context, in *MessageGetRequest, opts ...grpc.CallOption) (*MessageGetResponse, error)
 	Update(ctx context.Context, in *MessageUpdateRequest, opts ...grpc.CallOption) (*MessageUpdateResponse, error)
 	Cancel(ctx context.Context, in *MessageCancelRequest, opts ...grpc.CallOption) (*MessageCancelResponse, error)
-	Register(ctx context.Context, in *MessageRegisterRequest, opts ...grpc.CallOption) (*MessageRegisterResponse, error)
 }
 
-type messageServiceClient struct {
+type schedulerServiceClient struct {
 	cc *grpc.ClientConn
 }
 
-func NewMessageServiceClient(cc *grpc.ClientConn) MessageServiceClient {
-	return &messageServiceClient{cc}
+func NewSchedulerServiceClient(cc *grpc.ClientConn) SchedulerServiceClient {
+	return &schedulerServiceClient{cc}
 }
 
-func (c *messageServiceClient) Put(ctx context.Context, in *MessagePutRequest, opts ...grpc.CallOption) (*MessagePutResponse, error) {
+func (c *schedulerServiceClient) Put(ctx context.Context, in *MessagePutRequest, opts ...grpc.CallOption) (*MessagePutResponse, error) {
 	out := new(MessagePutResponse)
-	err := c.cc.Invoke(ctx, "/proto.MessageService/Put", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.SchedulerService/Put", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *messageServiceClient) Get(ctx context.Context, in *MessageGetRequest, opts ...grpc.CallOption) (*MessageGetResponse, error) {
+func (c *schedulerServiceClient) Get(ctx context.Context, in *MessageGetRequest, opts ...grpc.CallOption) (*MessageGetResponse, error) {
 	out := new(MessageGetResponse)
-	err := c.cc.Invoke(ctx, "/proto.MessageService/Get", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.SchedulerService/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *messageServiceClient) Update(ctx context.Context, in *MessageUpdateRequest, opts ...grpc.CallOption) (*MessageUpdateResponse, error) {
+func (c *schedulerServiceClient) Update(ctx context.Context, in *MessageUpdateRequest, opts ...grpc.CallOption) (*MessageUpdateResponse, error) {
 	out := new(MessageUpdateResponse)
-	err := c.cc.Invoke(ctx, "/proto.MessageService/Update", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.SchedulerService/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *messageServiceClient) Cancel(ctx context.Context, in *MessageCancelRequest, opts ...grpc.CallOption) (*MessageCancelResponse, error) {
+func (c *schedulerServiceClient) Cancel(ctx context.Context, in *MessageCancelRequest, opts ...grpc.CallOption) (*MessageCancelResponse, error) {
 	out := new(MessageCancelResponse)
-	err := c.cc.Invoke(ctx, "/proto.MessageService/Cancel", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.SchedulerService/Cancel", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *messageServiceClient) Register(ctx context.Context, in *MessageRegisterRequest, opts ...grpc.CallOption) (*MessageRegisterResponse, error) {
-	out := new(MessageRegisterResponse)
-	err := c.cc.Invoke(ctx, "/proto.MessageService/Register", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// MessageServiceServer is the server API for MessageService service.
-type MessageServiceServer interface {
+// SchedulerServiceServer is the server API for SchedulerService service.
+type SchedulerServiceServer interface {
 	Put(context.Context, *MessagePutRequest) (*MessagePutResponse, error)
 	Get(context.Context, *MessageGetRequest) (*MessageGetResponse, error)
 	Update(context.Context, *MessageUpdateRequest) (*MessageUpdateResponse, error)
 	Cancel(context.Context, *MessageCancelRequest) (*MessageCancelResponse, error)
-	Register(context.Context, *MessageRegisterRequest) (*MessageRegisterResponse, error)
 }
 
-func RegisterMessageServiceServer(s *grpc.Server, srv MessageServiceServer) {
-	s.RegisterService(&_MessageService_serviceDesc, srv)
+func RegisterSchedulerServiceServer(s *grpc.Server, srv SchedulerServiceServer) {
+	s.RegisterService(&_SchedulerService_serviceDesc, srv)
 }
 
-func _MessageService_Put_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SchedulerService_Put_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MessagePutRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MessageServiceServer).Put(ctx, in)
+		return srv.(SchedulerServiceServer).Put(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.MessageService/Put",
+		FullMethod: "/proto.SchedulerService/Put",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MessageServiceServer).Put(ctx, req.(*MessagePutRequest))
+		return srv.(SchedulerServiceServer).Put(ctx, req.(*MessagePutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MessageService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SchedulerService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MessageGetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MessageServiceServer).Get(ctx, in)
+		return srv.(SchedulerServiceServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.MessageService/Get",
+		FullMethod: "/proto.SchedulerService/Get",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MessageServiceServer).Get(ctx, req.(*MessageGetRequest))
+		return srv.(SchedulerServiceServer).Get(ctx, req.(*MessageGetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MessageService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SchedulerService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MessageUpdateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MessageServiceServer).Update(ctx, in)
+		return srv.(SchedulerServiceServer).Update(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.MessageService/Update",
+		FullMethod: "/proto.SchedulerService/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MessageServiceServer).Update(ctx, req.(*MessageUpdateRequest))
+		return srv.(SchedulerServiceServer).Update(ctx, req.(*MessageUpdateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MessageService_Cancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SchedulerService_Cancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MessageCancelRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MessageServiceServer).Cancel(ctx, in)
+		return srv.(SchedulerServiceServer).Cancel(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.MessageService/Cancel",
+		FullMethod: "/proto.SchedulerService/Cancel",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MessageServiceServer).Cancel(ctx, req.(*MessageCancelRequest))
+		return srv.(SchedulerServiceServer).Cancel(ctx, req.(*MessageCancelRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MessageService_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MessageRegisterRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MessageServiceServer).Register(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/proto.MessageService/Register",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MessageServiceServer).Register(ctx, req.(*MessageRegisterRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _MessageService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "proto.MessageService",
-	HandlerType: (*MessageServiceServer)(nil),
+var _SchedulerService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "proto.SchedulerService",
+	HandlerType: (*SchedulerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Put",
-			Handler:    _MessageService_Put_Handler,
+			Handler:    _SchedulerService_Put_Handler,
 		},
 		{
 			MethodName: "Get",
-			Handler:    _MessageService_Get_Handler,
+			Handler:    _SchedulerService_Get_Handler,
 		},
 		{
 			MethodName: "Update",
-			Handler:    _MessageService_Update_Handler,
+			Handler:    _SchedulerService_Update_Handler,
 		},
 		{
 			MethodName: "Cancel",
-			Handler:    _MessageService_Cancel_Handler,
-		},
-		{
-			MethodName: "Register",
-			Handler:    _MessageService_Register_Handler,
+			Handler:    _SchedulerService_Cancel_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

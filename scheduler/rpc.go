@@ -1,4 +1,4 @@
-package schedulersvc
+package scheduler
 
 import (
 	"fmt"
@@ -6,26 +6,24 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/microapis/messages-api"
-	"github.com/microapis/messages-api/channel"
-	"github.com/microapis/messages-api/scheduler"
+	"github.com/microapis/messages-lib/message"
 	"golang.org/x/net/context"
 
-	pb "github.com/microapis/messages-api/proto"
+	pb "github.com/microapis/messages-lib/proto"
 	"github.com/oklog/ulid"
 )
 
-var _ pb.MessageServiceServer = (*Service)(nil)
+var _ pb.SchedulerServiceServer = (*Service)(nil)
 
 // Service ...
 type Service struct {
-	schedulerSvc messages.SchedulerService
+	schedulerSvc SchedulerService
 }
 
-// New ...
-func New(config scheduler.StorageConfig) *Service {
+// NewRPC ...
+func NewRPC(config StorageConfig) *Service {
 	return &Service{
-		schedulerSvc: scheduler.New(config),
+		schedulerSvc: New(config),
 	}
 }
 
@@ -53,7 +51,7 @@ func (s *Service) Put(ctx context.Context, r *pb.MessagePutRequest) (*pb.Message
 		}, nil
 	}
 
-	if err := s.schedulerSvc.Put(id, channel, provider, content, messages.Pending); err != nil {
+	if err := s.schedulerSvc.Put(id, channel, provider, content, message.Pending); err != nil {
 		log.Println(fmt.Sprintf("[gRPC][MessagesService][Put][Error] error = %v", err))
 		return &pb.MessagePutResponse{
 			Error: &pb.MessagesError{
@@ -168,43 +166,4 @@ func (s *Service) Cancel(ctx context.Context, r *pb.MessageCancelRequest) (*pb.M
 
 	log.Println(fmt.Sprintf("[gRPC][MessagesService][Cancel][Response]"))
 	return &pb.MessageCancelResponse{}, nil
-}
-
-// Register ...
-func (s *Service) Register(ctx context.Context, r *pb.MessageRegisterRequest) (*pb.MessageRegisterResponse, error) {
-	c := r.GetChannel()
-	n := c.GetName()
-	h := c.GetHost()
-	p := c.GetPort()
-
-	providers := make([]*channel.Provider, 0)
-	for _, v := range c.GetProviders() {
-		provider := &channel.Provider{
-			Name:   v.GetName(),
-			Params: v.GetParams(),
-		}
-
-		providers = append(providers, provider)
-	}
-
-	channel := channel.Channel{
-		Name:      n,
-		Providers: providers,
-		Host:      h,
-		Port:      p,
-	}
-
-	err := s.schedulerSvc.Register(channel)
-	if err != nil {
-		log.Println(fmt.Sprintf("[gRPC][MessagesService][Register][Error] error = %v", err))
-		return &pb.MessageRegisterResponse{
-			Error: &pb.MessagesError{
-				Code:    500,
-				Message: err.Error(),
-			},
-		}, nil
-	}
-
-	log.Println(fmt.Sprintf("[gRPC][MessagesService][Update][Register]"))
-	return &pb.MessageRegisterResponse{}, nil
 }

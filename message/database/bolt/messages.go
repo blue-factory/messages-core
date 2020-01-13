@@ -3,11 +3,11 @@ package bolt
 import (
 	"github.com/boltdb/bolt"
 	"github.com/golang/protobuf/proto"
-	"github.com/microapis/messages-api"
+	"github.com/microapis/messages-lib/message"
 	"github.com/oklog/ulid"
 
-	db "github.com/microapis/messages-api/database"
-	pb "github.com/microapis/messages-api/proto"
+	db "github.com/microapis/messages-lib/message/database"
+	pb "github.com/microapis/messages-lib/proto"
 )
 
 // MessageStore ...
@@ -23,7 +23,7 @@ func NewMessageStore(dst *db.BoltDatastore) (*MessageStore, error) {
 }
 
 // AddMessage ...
-func (ss *MessageStore) AddMessage(m messages.Message) error {
+func (ss *MessageStore) AddMessage(m message.Message) error {
 	err := ss.Dst.DB.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket(db.MsgBucket)
 
@@ -50,7 +50,7 @@ func (ss *MessageStore) AddMessage(m messages.Message) error {
 }
 
 // Get ...
-func (ss *MessageStore) Get(id ulid.ULID) (*messages.Message, error) {
+func (ss *MessageStore) Get(id ulid.ULID) (*message.Message, error) {
 	var msg pb.Message
 	err := ss.Dst.DB.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket(db.MsgBucket)
@@ -68,7 +68,7 @@ func (ss *MessageStore) Get(id ulid.ULID) (*messages.Message, error) {
 		return nil, err
 	}
 
-	return &messages.Message{
+	return &message.Message{
 		ID:       id,
 		Channel:  msg.Channel,
 		Provider: msg.Provider,

@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/microapis/messages-api"
 	"github.com/microapis/messages-api/backend"
 )
 
@@ -32,7 +31,7 @@ func main() {
 	addr := fmt.Sprintf("%s:%d", *host, *port)
 
 	log.Printf("Serving at %s", addr)
-	if err := backend.ListenAndServe(messages.NetAddr(addr), &service{}); err != nil {
+	if err := backend.ListenAndServe(addr, &service{}); err != nil {
 		log.Fatal(err)
 	}
 }

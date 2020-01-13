@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/microapis/messages-api/channel"
-	db "github.com/microapis/messages-api/database"
+	"github.com/microapis/messages-lib/channel"
+	db "github.com/microapis/messages-lib/channel/database"
 )
 
 // ChannelStore ...

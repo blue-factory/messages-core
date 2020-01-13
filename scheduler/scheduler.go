@@ -1,21 +1,36 @@
 package scheduler
 
 import (
-	"context"
 	"log"
 	"math/rand"
 	"time"
 
 	"github.com/boltdb/bolt"
-	"github.com/microapis/messages-api"
-	"github.com/microapis/messages-api/channel"
-	dbBolt "github.com/microapis/messages-api/database/bolt"
-	dbRedis "github.com/microapis/messages-api/database/redis"
-	pb "github.com/microapis/messages-api/proto"
+	"github.com/microapis/messages-lib/channel"
+	dbRedis "github.com/microapis/messages-lib/channel/database/redis"
+	"github.com/microapis/messages-lib/message"
+	dbBolt "github.com/microapis/messages-lib/message/database/bolt"
 	"github.com/oklog/ulid"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"
 )
+
+// SchedulerService stores and keep track of the statuses of messages.
+type SchedulerService interface {
+	// Put stores a message content and schedule the delivery on t time.
+	// TODO(ca): change subjectID params to ulid.ULID type
+	Put(id ulid.ULID, channel string, provider string, content string, status string) error
+
+	// Get retrieves the message with the given id.
+	//
+	// In case of any error the Message will be nil.
+	Get(id ulid.ULID) (*message.Message, error)
+
+	// Update updates the content of the message with the given id.
+	Update(id ulid.ULID, content string) error
+
+	// Cancel cancel the message with the given id.
+	Cancel(id ulid.ULID) error
+}
 
 // StorageConfig is a struct that will be deleted.
 type StorageConfig struct {
@@ -28,18 +43,24 @@ type StorageConfig struct {
 
 	MessageStore *dbBolt.MessageStore
 	ChannelStore *dbRedis.ChannelStore
+
+	Approve  func(content string) (bool, error)
+	Delivery func(content string) error
 }
 
-// New builds a new messages.Store backed by bolt DB.
+// New builds a new message.Store backed by bolt DB.
 //
 // In case of any error it panics.
-func New(config StorageConfig) messages.SchedulerService {
+func New(config StorageConfig) SchedulerService {
 	s := &service{
 		pq:  newPriorityQueue(config),
 		idc: make(chan ulid.ULID),
 
 		ms: config.MessageStore,
 		cs: config.ChannelStore,
+
+		approve:  config.Approve,
+		delivery: config.Delivery,
 	}
 
 	go s.run()
@@ -57,26 +78,24 @@ type service struct {
 
 	ms *dbBolt.MessageStore
 	cs *dbRedis.ChannelStore
+
+	approve  func(content string) (bool, error)
+	delivery func(content string) error
 }
 
 // Put ...
 func (s *service) Put(id ulid.ULID, channel string, provider string, content string, status string) error {
-	ch, err := s.cs.Get(channel)
-	if err != nil {
-		return err
-	}
+	// ch, err := s.cs.Get(channel)
+	// if err != nil {
+	// 	return err
+	// }
 
-	conn, err := grpc.Dial(ch.Address(), grpc.WithInsecure())
-	if err != nil {
-		return err
-	}
-	defer conn.Close()
+	// log.Println(ch.Address())
 
-	client := pb.NewMessageBackendServiceClient(conn)
-	resp, err := client.Approve(context.Background(), &pb.MessageBackendApproveRequest{Content: content})
+	ok, err := s.approve(content)
 	if err != nil {
 		// update status to crashed-approve
-		e := s.ms.UpdateStatus(id, messages.CrashedApprove)
+		e := s.ms.UpdateStatus(id, message.CrashedApprove)
 		if e != nil {
 			return e
 		}
@@ -84,22 +103,17 @@ func (s *service) Put(id ulid.ULID, channel string, provider string, content str
 		// TODO(ca): send callback when could not updated status
 		return err
 	}
-	if !resp.Valid {
+	if !ok {
 		// update status to failed-approve
-		err := s.ms.UpdateStatus(id, messages.FailedApprove)
+		err := s.ms.UpdateStatus(id, message.FailedApprove)
 		if err != nil {
 			return err
 		}
 
-		// TODO(ca): send callback when could not updated status
-
-		if resp.Error != nil {
-			return errors.Errorf("invalid message, %s", resp.Error.Message)
-		}
-		return errors.New("invalid message")
+		return errors.New("failed message")
 	}
 
-	m := messages.Message{
+	m := message.Message{
 		ID:       id,
 		Content:  content,
 		Status:   status,
@@ -118,7 +132,7 @@ func (s *service) Put(id ulid.ULID, channel string, provider string, content str
 }
 
 // Get ...
-func (s *service) Get(id ulid.ULID) (*messages.Message, error) {
+func (s *service) Get(id ulid.ULID) (*message.Message, error) {
 	msg, err := s.ms.Get(id)
 	if err != nil {
 		return nil, err
@@ -149,7 +163,7 @@ func (s *service) Cancel(id ulid.ULID) error {
 		return nil
 	}
 
-	err = s.ms.UpdateStatus(id, messages.Cancelled)
+	err = s.ms.UpdateStatus(id, message.Cancelled)
 	if err != nil {
 		return err
 	}
@@ -227,41 +241,20 @@ func (s *service) send(id ulid.ULID) {
 		return
 	}
 
-	ch, err := s.cs.Get(msg.Channel)
+	// ch, err := s.cs.Get(msg.Channel)
+	// if err != nil {
+	// 	log.Printf("Error: could not get channel, backend %s is not register, %v", msg.Channel, err)
+	// 	return
+	// }
+
+	// log.Println(ch.Name)
+
+	err = s.delivery(msg.Content)
 	if err != nil {
-		log.Printf("Error: could not get channel, backend %s is not register, %v", msg.Channel, err)
-		return
-	}
-
-	// TODO(ja): use secure connections
-
-	conn, err := grpc.Dial(ch.Address(), grpc.WithInsecure())
-	if err != nil {
-		log.Printf("Error: could not connect to backend at %s, %v", msg.Provider, err)
-		return
-	}
-	defer conn.Close()
-
-	client := pb.NewMessageBackendServiceClient(conn)
-	resp, err := client.Deliver(context.Background(), &pb.MessageBackendDeliverRequest{Content: msg.Content})
-	if err != nil {
-		log.Printf("Error: could not deliver message %s, %v", msg.ID, err)
-
-		// update status to crashed-deliver
-		e := s.ms.UpdateStatus(id, messages.CrashedDeliver)
-		if e != nil {
-			log.Printf("Error: could not update message status %s, %v", msg.ID, err)
-			return
-		}
-
-		// TODO(ca): send callback when could not updated status
-		return
-	}
-	if resp.Error != nil {
-		log.Printf("Error: failed to deliver message %s, %v", msg.ID, resp.Error.Message)
+		log.Printf("Error: failed to deliver message %s, %v", msg.ID, err)
 
 		// update status to failed-deliver
-		e := s.ms.UpdateStatus(id, messages.FailedDeliver)
+		e := s.ms.UpdateStatus(id, message.FailedDeliver)
 		if e != nil {
 			// TODO(ca): check this error
 			log.Printf("Error: could not update message status %s, %v", msg.ID, err)
@@ -272,7 +265,7 @@ func (s *service) send(id ulid.ULID) {
 		return
 	}
 
-	e := s.ms.UpdateStatus(id, messages.Sent)
+	e := s.ms.UpdateStatus(id, message.Sent)
 	if e != nil {
 		log.Printf("Error: could not update message status %s, %v", msg.ID, err)
 		return

@@ -71,6 +71,4 @@ If you are already using Messages-API we recommend you to use the client in go. 
 
 ## TODO
 
-- [ ] Task 1.
-- [ ] Task 2.
-- [ ] Task 3.
+- [ ] Catch errors inside Schedulersend(id ulid.ULID) method and push on pq again adding X seconds to delivery time.

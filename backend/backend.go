@@ -10,6 +10,18 @@ import (
 	"google.golang.org/grpc"
 )
 
+// Backend manages the approval and delivery of messages.
+type Backend interface {
+	// Aprove validates the content of a message.
+	//
+	// If the message is valid the error will be nil, otherwise the error
+	// must be non-nil and describe why the message is invalid.
+	Approve(content string) (ok bool, err error)
+
+	// Deliver delivers the message encoded in content.
+	Deliver(content string) error
+}
+
 // ListenAndServe ...
 func ListenAndServe(addr string, backend messages.Backend) error {
 	lis, err := net.Listen("tcp", string(addr))
