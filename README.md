@@ -1,10 +1,8 @@
-# Messages API
+# Messages Lib
 
-Microservice responsible to send everything notifications such as: email, sms, iot, push and hooks. The service has a planner who, through the grpc protocol, can place, update or cancel the sending of notifications.
+Go implementation that allows you to mount a messaging service to send notifications such as: email, sms, iot, push and hooks. The service has a planner who, through the grpc protocol, can place, update or cancel the sending of notifications.
 
 ## Services Architecture
-
-The solution consists of a central microservice that is connected to the queue and the database. On the other hand, there are several **Channel APIs** implementations that were registered to Messages API.
 
 [![Architecture of
 microservices](./docs/images/messages-architecture.png)](./docs/images/messages-architecture.png)
@@ -54,19 +52,7 @@ service MessageService {
 
 ## Client
 
-If you are already using Messages-API we recommend you to use the client in go. [[Link]](https://github.com/microapis/clients-go)
-
-## Commands (Development)
-
-`make build`: build user service for osx.
-
-`make linux`: build user service for linux os.
-
-`make docker`: build docker.
-
-`docker run -it -p 5050:5050 messages-api`: run docker.
-
-`PORT=<port> REDIS_HOST=<redis-host> REDIS_PORT=<redis-port> ./bin/messages-api`: run messages service.
+If you are already using Messages APIs we recommend you to use the client in go. [[Link]](https://github.com/microapis/clients-go)
 
 ## TODO
 
