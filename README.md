@@ -39,7 +39,7 @@ message Channel {
 
 message Provider {
   string name = 1;
-  map<string, google.protobuf.Any> params = 2;
+  map<string, string> params = 2;
 }
 
 service MessageService {
