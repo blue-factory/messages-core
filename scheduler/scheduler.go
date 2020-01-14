@@ -34,12 +34,9 @@ type SchedulerService interface {
 
 // StorageConfig is a struct that will be deleted.
 type StorageConfig struct {
-	RedisHost        string        // URL of the redis server
-	RedisPort        string        // URL of the redis server
-	RedisLog         bool          // log database commands
-	RedisMaxIdle     int           // maximum number of idle connections in the pool
-	RedisDatabase    int           // redis database to use
-	RedisIdleTimeout time.Duration // timeout for idle connections
+	RedisHost     string // URL of the redis server
+	RedisPort     string // URL of the redis server
+	RedisDatabase int    // redis database to use
 
 	MessageStore *dbBolt.MessageStore
 	ChannelStore *dbRedis.ChannelStore
