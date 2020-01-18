@@ -3,11 +3,11 @@ package bolt
 import (
 	"github.com/boltdb/bolt"
 	"github.com/golang/protobuf/proto"
-	"github.com/microapis/messages-lib/message"
+	"github.com/microapis/messages-core/message"
 	"github.com/oklog/ulid"
 
-	db "github.com/microapis/messages-lib/message/database"
-	pb "github.com/microapis/messages-lib/proto"
+	db "github.com/microapis/messages-core/message/database"
+	pb "github.com/microapis/messages-core/proto"
 )
 
 // MessageStore ...
@@ -36,6 +36,7 @@ func (ss *MessageStore) AddMessage(m message.Message) error {
 			Channel:  string(m.Channel),
 			Provider: string(m.Provider),
 			Content:  string(m.Content),
+			Status:   string(message.Pending),
 		})
 		if jerr != nil {
 			return jerr
@@ -73,6 +74,7 @@ func (ss *MessageStore) Get(id ulid.ULID) (*message.Message, error) {
 		Channel:  msg.Channel,
 		Provider: msg.Provider,
 		Content:  msg.Content,
+		Status:   msg.Status,
 	}, nil
 }
 

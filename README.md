@@ -1,4 +1,4 @@
-# Messages Lib
+# Messages Core
 
 Go implementation that allows you to mount a messaging service to send notifications such as: email, sms, iot, push and hooks. The service has a planner who, through the grpc protocol, can place, update or cancel the sending of notifications.
 

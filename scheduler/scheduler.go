@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/boltdb/bolt"
-	"github.com/microapis/messages-lib/channel"
-	dbRedis "github.com/microapis/messages-lib/channel/database/redis"
-	"github.com/microapis/messages-lib/message"
-	dbBolt "github.com/microapis/messages-lib/message/database/bolt"
+	"github.com/microapis/messages-core/channel"
+	dbRedis "github.com/microapis/messages-core/channel/database/redis"
+	"github.com/microapis/messages-core/message"
+	dbBolt "github.com/microapis/messages-core/message/database/bolt"
 	"github.com/oklog/ulid"
 	"github.com/pkg/errors"
 )

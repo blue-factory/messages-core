@@ -5,15 +5,15 @@ import (
 	"log"
 	"net"
 
-	"github.com/microapis/messages-lib/proto"
-	"github.com/microapis/messages-lib/scheduler"
-	schedulersvc "github.com/microapis/messages-lib/scheduler"
+	"github.com/microapis/messages-core/proto"
+	"github.com/microapis/messages-core/scheduler"
+	schedulersvc "github.com/microapis/messages-core/scheduler"
 
-	channeldb "github.com/microapis/messages-lib/channel/database"
-	"github.com/microapis/messages-lib/channel/database/redis"
+	channeldb "github.com/microapis/messages-core/channel/database"
+	"github.com/microapis/messages-core/channel/database/redis"
 
-	messagedb "github.com/microapis/messages-lib/message/database"
-	"github.com/microapis/messages-lib/message/database/bolt"
+	messagedb "github.com/microapis/messages-core/message/database"
+	"github.com/microapis/messages-core/message/database/bolt"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/microapis/messages-api/backend"
+	"github.com/microapis/messages-core/backend"
 )
 
 type service struct{}

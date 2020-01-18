@@ -1,7 +1,7 @@
 package message
 
 import (
-	"github.com/microapis/messages-lib/proto"
+	"github.com/microapis/messages-core/proto"
 	"github.com/oklog/ulid"
 )
 

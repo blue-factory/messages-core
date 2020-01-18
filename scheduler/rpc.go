@@ -6,10 +6,10 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/microapis/messages-lib/message"
+	"github.com/microapis/messages-core/message"
 	"golang.org/x/net/context"
 
-	pb "github.com/microapis/messages-lib/proto"
+	pb "github.com/microapis/messages-core/proto"
 	"github.com/oklog/ulid"
 )
 
