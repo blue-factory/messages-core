@@ -1,9 +1,6 @@
 package db
 
 import (
-	"fmt"
-	"log"
-
 	"github.com/go-redis/redis"
 )
 
@@ -14,19 +11,18 @@ type RedisDatastore struct {
 
 // NewRedisDatastore returns a new datastore instance or an error if
 // a datasore cannot be returned
-func NewRedisDatastore(host, port string) (*RedisDatastore, error) {
-	client := redis.NewClient(&redis.Options{
-		Addr: fmt.Sprintf("%s:%s", host, port),
-		DB:   0, // channels db
-	})
-
-	log.Println("Redis: ping")
-	_, err := client.Ping().Result()
+func NewRedisDatastore(url string) (*RedisDatastore, error) {
+	opts, err := redis.ParseURL(url)
 	if err != nil {
 		return nil, err
 	}
 
-	log.Println("Redis: pong")
+	client := redis.NewClient(opts)
+
+	_, err = client.Ping().Result()
+	if err != nil {
+		return nil, err
+	}
 
 	return &RedisDatastore{
 		Client: client,

@@ -1,13 +1,14 @@
 package scheduler
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/garyburd/redigo/redis"
 	"github.com/oklog/ulid"
 	"github.com/pkg/errors"
 )
+
+// rd "github.com/go-redis/redis"
 
 // TODO: Add retry logic and only panic if connection is unrecoverable.
 
@@ -150,14 +151,8 @@ func (pq *priorityQueue) DeleteByID(id ulid.ULID) (bool, error) {
 
 func dial(config StorageConfig) func() (redis.Conn, error) {
 	return func() (redis.Conn, error) {
-		addr := fmt.Sprintf("%s:%s", config.RedisHost, config.RedisPort)
-
-		conn, err := redis.Dial("tcp", addr)
+		conn, err := redis.DialURL(config.RedisURL)
 		if err != nil {
-			return nil, err
-		}
-		if _, err = conn.Do("SELECT", config.RedisDatabase); err != nil {
-			conn.Close()
 			return nil, err
 		}
 

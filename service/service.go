@@ -21,11 +21,9 @@ import (
 
 // ServiceConfig ...
 type ServiceConfig struct {
-	Port string
+	Addr string
 
-	RedisHost     string
-	RedisPort     string
-	RedisDatabase int
+	RedisURL string
 
 	Approve func(content string) (bool, error)
 	Deliver func(content string) error
@@ -35,7 +33,7 @@ type ServiceConfig struct {
 type Service struct {
 	Instance *schedulersvc.Service
 	Name     string
-	Port     string
+	Addr     string
 }
 
 // NewMessageService ...
@@ -46,7 +44,7 @@ func NewMessageService(name string, config ServiceConfig) (*Service, error) {
 		return nil, err
 	}
 
-	redisDst, err := channeldb.NewRedisDatastore(config.RedisHost, config.RedisPort)
+	redisDst, err := channeldb.NewRedisDatastore(config.RedisURL)
 	if err != nil {
 		return nil, err
 	}
@@ -67,9 +65,7 @@ func NewMessageService(name string, config ServiceConfig) (*Service, error) {
 		MessageStore: ms,
 		ChannelStore: cs,
 
-		RedisHost:     config.RedisHost,
-		RedisPort:     config.RedisPort,
-		RedisDatabase: config.RedisDatabase,
+		RedisURL: config.RedisURL,
 
 		Approve:  config.Approve,
 		Delivery: config.Deliver,
@@ -78,15 +74,12 @@ func NewMessageService(name string, config ServiceConfig) (*Service, error) {
 	return &Service{
 		Instance: svc,
 		Name:     name,
-		Port:     config.Port,
+		Addr:     config.Addr,
 	}, nil
 }
 
 // Run ...
 func (s *Service) Run() error {
-	// define address value to grpc service
-	addr := fmt.Sprintf("0.0.0.0:%s", s.Port)
-
 	// initialize gprc server
 	srv := grpc.NewServer()
 
@@ -95,12 +88,12 @@ func (s *Service) Run() error {
 
 	log.Println("Starting Messages " + s.Name + " service...")
 
-	lis, err := net.Listen("tcp", addr)
+	lis, err := net.Listen("tcp", s.Addr)
 	if err != nil {
 		return err
 	}
 
-	log.Println(fmt.Sprintf("Messages "+s.Name+" service, Listening on: %v", s.Port))
+	log.Println(fmt.Sprintf("Messages "+s.Name+" service, Listening on: %v", s.Addr))
 
 	if err := srv.Serve(lis); err != nil {
 		return err
