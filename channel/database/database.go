@@ -1,6 +1,8 @@
 package db
 
 import (
+	"context"
+
 	"github.com/go-redis/redis"
 )
 
@@ -18,8 +20,9 @@ func NewRedisDatastore(url string) (*RedisDatastore, error) {
 	}
 
 	client := redis.NewClient(opts)
+	ctx := context.Background()
 
-	_, err = client.Ping().Result()
+	_, err = client.Ping(ctx).Result()
 	if err != nil {
 		return nil, err
 	}

@@ -1,6 +1,7 @@
 package redis
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 
@@ -31,7 +32,8 @@ func (ss *ChannelStore) Register(c channel.Channel) error {
 
 	log.Println("ChannelStore#Register", c.Name, string(b))
 
-	err = ss.Dst.Client.Set(c.Name, string(b), 0).Err()
+	ctx := context.Background()
+	err = ss.Dst.Client.Set(ctx, c.Name, string(b), 0).Err()
 	if err != nil {
 		return err
 	}
@@ -41,7 +43,8 @@ func (ss *ChannelStore) Register(c channel.Channel) error {
 
 // Get ...
 func (ss *ChannelStore) Get(name string) (*channel.Channel, error) {
-	val, err := ss.Dst.Client.Get(name).Result()
+	ctx := context.Background()
+	val, err := ss.Dst.Client.Get(ctx, name).Result()
 	if err != nil {
 		return nil, err
 	}
@@ -59,14 +62,15 @@ func (ss *ChannelStore) Get(name string) (*channel.Channel, error) {
 
 // GetAll ...
 func (ss *ChannelStore) GetAll() ([]*channel.Channel, error) {
-	keys, err := ss.Dst.Client.Keys("*").Result()
+	ctx := context.Background()
+	keys, err := ss.Dst.Client.Keys(ctx, "*").Result()
 	if err == nil {
 		return nil, err
 	}
 
 	log.Println("keys", keys)
 
-	values, err := ss.Dst.Client.MGet(keys...).Result()
+	values, err := ss.Dst.Client.MGet(ctx, keys...).Result()
 	if err == nil {
 		return nil, err
 	}
