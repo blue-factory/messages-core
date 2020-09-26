@@ -19,6 +19,9 @@ func NewRedisDatastore(url string) (*RedisDatastore, error) {
 		return nil, err
 	}
 
+	// see: https://github.com/go-redis/redis/issues/1343
+	opts.Username = ""
+
 	client := redis.NewClient(opts)
 	ctx := context.Background()
 
